@@ -1,0 +1,10 @@
+*.out
+*.o
+*.obj
+*.exe
+*.txt
+main.c
+main.cpp
+DSA*.c
+DSA*.cpp
+.vscode
