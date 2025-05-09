@@ -40,4 +40,4 @@ To run any of the DSA programs in this repo:
 Each `.c` and `.cpp` file contains a solution for a specific DSA problem or concept. The naming conventions may vary.
 
 ## 🔄 Ongoing Progress
-This repository is a work in progress. I will continue to add more code and examples as I explore new C++ concepts, projects, and challenges. Stay tuned for more updates!
+This repository is a work in progress. I will continue to add more code and examples as I explore new DSA concepts, projects, and challenges. Stay tuned for more updates!
