@@ -1,6 +1,6 @@
 # Data Structures & Algorithms - Learning Journey
 
-Welcome to my **Data Structures and Algorithms (DSA)** repository! This repo contains the code I wrote while learning DSA concepts for the first time. It includes a variety of problems and solutions implemented in **C** and **C++**.
+Welcome to my **Data Structures and Algorithms (DSA)** repository! This repo contains the code I wrote while learning DSA concepts for the first time. It includes a variety of problems and solutions implemented in **C** and **C++**. It serves as a personal reference and may help others who are just starting out as well.
 
 ## 📚 Topics Covered
 
@@ -38,3 +38,6 @@ To run any of the DSA programs in this repo:
 ## 📝 Files
 
 Each `.c` and `.cpp` file contains a solution for a specific DSA problem or concept. The naming conventions may vary.
+
+## 🔄 Ongoing Progress
+This repository is a work in progress. I will continue to add more code and examples as I explore new C++ concepts, projects, and challenges. Stay tuned for more updates!
