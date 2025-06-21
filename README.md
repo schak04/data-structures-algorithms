@@ -1,6 +1,6 @@
 # Data Structures & Algorithms
 
-This repository contains the code I wrote while learning DSA. It includes a variety of concepts implemented in **C** and **C++**.
+This repository contains the code I wrote while learning DSA. It includes a variety of concepts and problems implemented in **C** and **C++**.
 
 ## Note
 
