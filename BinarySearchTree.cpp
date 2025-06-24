@@ -81,7 +81,8 @@ Node* deleteNode(Node* root, int key) {
             return temp;
         }
         // Case 2: Two children
-        Node* temp = findMin(root->right); // inorder successor
+        Node* temp = findMin(root->right); // find the inorder successor
+        // inorder successor = ->  the smallest node in the right subtree and the next larger element
         root->data = temp->data;
         root->right = deleteNode(root->right, temp->data);
     }
