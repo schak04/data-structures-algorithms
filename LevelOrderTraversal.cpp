@@ -12,13 +12,13 @@ struct Node {
     // Constructor to create a new node
     Node(int val) {
         data = val;
-        left = right = NULL;
+        left = right = nullptr;
     }
 };
 
 // Function for Level Order Traversal using a queue
 void levelOrderTraversal(Node* root) {
-    if (root == NULL)
+    if (root == nullptr)
         return;
     queue<Node*> q;
     q.push(root);
@@ -26,9 +26,9 @@ void levelOrderTraversal(Node* root) {
         Node* current = q.front();
         cout << current->data << " ";
         q.pop();
-        if (current->left != NULL)
+        if (current->left != nullptr)
             q.push(current->left);
-        if (current->right != NULL)
+        if (current->right != nullptr)
             q.push(current->right);
     }
 }
