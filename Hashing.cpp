@@ -16,92 +16,102 @@
  *   2. Folding Hash Functions
  */
 
-#include <iostream>
-#include <vector>
-#include <string>
-
-class HashTable {
-private:
-    static constexpr int TABLE_SIZE = 10;
-    std::vector<int> table;
-    static constexpr int EMPTY = -1;
-
-    /**
-     * Hash function using modulo operation
-     * @param key Key to hash
-     * @return Hash index
-     */
-    int hash(int key) const {
-        return key % TABLE_SIZE;
-    }
-
-public:
-    /**
-     * Constructor
-     */
-    HashTable() : table(TABLE_SIZE, EMPTY) {}
-
-    /**
-     * Insert a key into the hash table (basic, no collision handling)
-     * @param key Key to insert
-     */
-    void insert(int key) {
-        int index = hash(key);
-        if (table[index] == EMPTY) {
-            table[index] = key;
-            std::cout << "Key " << key << " inserted at index " << index << std::endl;
-        } else {
-            std::cout << "Collision at index " << index << " for key " << key << std::endl;
-        }
-    }
-
-    /**
-     * Search for a key in the hash table
-     * @param key Key to search
-     * @return true if found, false otherwise
-     */
-    bool search(int key) const {
-        int index = hash(key);
-        return table[index] == key;
-    }
-
-    /**
-     * Display the hash table
-     */
-    void display() const {
-        std::cout << "Hash Table:\n";
-        for (int i = 0; i < TABLE_SIZE; i++) {
-            if (table[i] != EMPTY) {
-                std::cout << "Index " << i << ": " << table[i] << std::endl;
-            } else {
-                std::cout << "Index " << i << ": ~" << std::endl;
-            }
-        }
-    }
-};
-
-int main() {
-    HashTable ht;
-
-    std::cout << "=== Basic Hash Table Demo ===\n\n";
-
-    // Insert keys
-    ht.insert(5);
-    ht.insert(15);
-    ht.insert(25);
-    ht.insert(7);
-    ht.insert(17);
-
-    std::cout << "\n";
-    ht.display();
-
-    // Search for keys
-    std::cout << "\nSearching for key 15: " << (ht.search(15) ? "Found" : "Not Found") << std::endl;
-    std::cout << "Searching for key 20: " << (ht.search(20) ? "Found" : "Not Found") << std::endl;
-
-    std::cout << "\nNote: This is a basic implementation without collision resolution.\n";
-    std::cout << "For collision handling, see LinearProbing.cpp and QuadraticProbing.cpp\n";
-
-    return 0;
-}
-
+ #include <iostream>
+ #include <vector>
+ #include <string>
+ 
+ class HashTable {
+ private:
+     static constexpr int TABLE_SIZE = 10;
+     std::vector<int> table;
+     static constexpr int EMPTY = -1;
+     static constexpr int DELETED = -2; // mark deleted slots
+ 
+     int hash(int key) const {
+         return key % TABLE_SIZE;
+     }
+ 
+ public:
+     HashTable() : table(TABLE_SIZE, EMPTY) {}
+ 
+     // Insert with linear probing
+     void insert(int key) {
+         int index = hash(key);
+         int i = 0;
+ 
+         while (table[(index + i) % TABLE_SIZE] != EMPTY && table[(index + i) % TABLE_SIZE] != DELETED) {
+             i++;
+             if (i == TABLE_SIZE) {
+                 std::cout << "Hash table full, cannot insert " << key << std::endl;
+                 return;
+             }
+         }
+         table[(index + i) % TABLE_SIZE] = key;
+         std::cout << "Key " << key << " inserted at index " << (index + i) % TABLE_SIZE << std::endl;
+     }
+ 
+     // Search with linear probing
+     bool search(int key) const {
+         int index = hash(key);
+         int i = 0;
+         while (table[(index + i) % TABLE_SIZE] != EMPTY && i < TABLE_SIZE) {
+             if (table[(index + i) % TABLE_SIZE] == key)
+                 return true;
+             i++;
+         }
+         return false;
+     }
+ 
+     // Delete a key (linear probing)
+     void remove(int key) {
+         int index = hash(key);
+         int i = 0;
+         while (table[(index + i) % TABLE_SIZE] != EMPTY && i < TABLE_SIZE) {
+             if (table[(index + i) % TABLE_SIZE] == key) {
+                 table[(index + i) % TABLE_SIZE] = DELETED;
+                 std::cout << "Key " << key << " deleted from index " << (index + i) % TABLE_SIZE << std::endl;
+                 return;
+             }
+             i++;
+         }
+         std::cout << "Key " << key << " not found for deletion.\n";
+     }
+ 
+     void display() const {
+         std::cout << "Hash Table:\n";
+         for (int i = 0; i < TABLE_SIZE; i++) {
+             if (table[i] == EMPTY)
+                 std::cout << "Index " << i << ": ~\n";
+             else if (table[i] == DELETED)
+                 std::cout << "Index " << i << ": deleted\n";
+             else
+                 std::cout << "Index " << i << ": " << table[i] << "\n";
+         }
+     }
+ };
+ 
+ int main() {
+     HashTable ht;
+ 
+     std::cout << "=== Hash Table with Linear Probing Demo ===\n\n";
+ 
+     ht.insert(5);
+     ht.insert(15);
+     ht.insert(25);
+     ht.insert(7);
+     ht.insert(17);
+ 
+     std::cout << "\nInitial table:\n";
+     ht.display();
+ 
+     std::cout << "\nSearch 15: " << (ht.search(15) ? "Found" : "Not Found") << "\n";
+     std::cout << "Search 20: " << (ht.search(20) ? "Found" : "Not Found") << "\n";
+ 
+     ht.remove(15);
+     ht.remove(7);
+ 
+     std::cout << "\nAfter deletions:\n";
+     ht.display();
+ 
+     return 0;
+ } 

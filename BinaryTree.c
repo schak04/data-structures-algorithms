@@ -10,36 +10,125 @@ struct Node {
 
 // Function to create a new node
 struct Node* createNode(int data) {
-    struct Node* newNode = (struct Node* )malloc(sizeof(struct Node));
+    struct Node* newNode = (struct Node*) malloc(sizeof(struct Node));
     newNode->data = data;
     newNode->left = NULL;
     newNode->right = NULL;
     return newNode;
 }
 
-// Function to insert a node in a binary tree using recursion
-// Inserts in the first available position found in the tree
+// Insert at first available position
 void insertNode(struct Node** root, int data) {
     if (*root == NULL) {
-        // Create and insert the new node if root is NULL
         *root = createNode(data);
         return;
     }
-    // Recursively insert in left subtree if available
+
     else if ((*root)->left == NULL) {
         insertNode(&(*root)->left, data);
     }
-    // Else recursively insert in right subtree
     else if ((*root)->right == NULL) {
         insertNode(&(*root)->right, data);
     }
-    // If both left and right subtrees are occupied, continue recursively
     else {
         insertNode(&(*root)->left, data);
     }
 }
 
-// Function to perform in-order traversal (for testing purposes)
+// Search a value in the binary tree
+int search(struct Node* root, int key) {
+    if (root == NULL) return 0;
+    if (root->data == key) return 1;
+
+    return search(root->left, key) || search(root->right, key);
+}
+
+// Height of tree
+int height(struct Node* root) {
+    if (root == NULL) return 0;
+
+    int hl = height(root->left);
+    int hr = height(root->right);
+
+    return (hl > hr ? hl : hr) + 1;
+}
+
+// Count nodes
+int countNodes(struct Node* root) {
+    if (root == NULL) return 0;
+    return 1 + countNodes(root->left) + countNodes(root->right);
+}
+
+// Delete any node → replace with deepest node
+struct Node* getDeepestNode(struct Node* root) {
+    if (!root) return NULL;
+    struct Node* res = root;
+
+    if (root->left)  res = getDeepestNode(root->left);
+    if (root->right) res = getDeepestNode(root->right);
+
+    return res;
+}
+
+void deleteDeepest(struct Node* root, struct Node* dnode) {
+    if (!root) return;
+
+    if (root->left) {
+        if (root->left == dnode) {
+            free(root->left);
+            root->left = NULL;
+            return;
+        }
+        deleteDeepest(root->left, dnode);
+    }
+
+    if (root->right) {
+        if (root->right == dnode) {
+            free(root->right);
+            root->right = NULL;
+            return;
+        }
+        deleteDeepest(root->right, dnode);
+    }
+}
+
+struct Node* deleteNode(struct Node* root, int key) {
+    if (root == NULL) return NULL;
+    if (root->left == NULL && root->right == NULL) {
+        if (root->data == key) {
+            free(root);
+            return NULL;
+        }
+        return root;
+    }
+
+    struct Node* keyNode = NULL;
+    struct Node* temp;
+
+    // Search recursively (only logical approach since your insert is recursive)
+    if (root->data == key) keyNode = root;
+
+    if (root->left) {
+        temp = deleteNode(root->left, key);
+        root->left = temp;
+    }
+
+    if (root->right) {
+        temp = deleteNode(root->right, key);
+        root->right = temp;
+    }
+
+    if (!keyNode) return root;
+
+    struct Node* deepest = getDeepestNode(root);
+    keyNode->data = deepest->data;
+
+    deleteDeepest(root, deepest);
+
+    return root;
+}
+
+// Traversals
 void inorderTraversal(struct Node* root) {
     if (root != NULL) {
         inorderTraversal(root->left);
@@ -48,7 +137,6 @@ void inorderTraversal(struct Node* root) {
     }
 }
 
-// Function to perform pre-order traversal (for testing purposes)
 void preorderTraversal(struct Node* root) {
     if (root != NULL) {
         printf("%d ", root->data);
@@ -57,7 +145,6 @@ void preorderTraversal(struct Node* root) {
     }
 }
 
-// Function to perform post-order traversal (for testing purposes)
 void postorderTraversal(struct Node* root) {
     if (root != NULL) {
         postorderTraversal(root->left);
@@ -66,45 +153,24 @@ void postorderTraversal(struct Node* root) {
     }
 }
 
-// Main function
 int main() {
-    // Creating the root of the binary tree
     struct Node* root = createNode(10);
 
-    // Manually creating some nodes
     root->left = createNode(11);
     root->left->left = createNode(7);
     root->right = createNode(9);
     root->right->left = createNode(15);
     root->right->right = createNode(8);
 
-    printf("In-order traversal before insertion: \n");
+    printf("Height: %d\n", height(root));
+    printf("Nodes: %d\n", countNodes(root));
+
+    printf("Search 15: %d\n", search(root, 15));
+    printf("Search 99: %d\n", search(root, 99));
+
+    root = deleteNode(root, 11);
+
     inorderTraversal(root);
-    printf("\n");
-
-    printf("Pre-order traversal before insertion: \n");
-    preorderTraversal(root);
-    printf("\n");
-
-    printf("Post-order traversal before insertion: \n");
-    postorderTraversal(root);
-    printf("\n");
-
-    // Inserting a new node at first available position
-    int newData = 12;
-    insertNode(&root, newData);
-
-    printf("In-order traversal after insertion of %d: \n", newData);
-    inorderTraversal(root);
-    printf("\n");
-
-    printf("Pre-order traversal after insertion of %d: \n", newData);
-    preorderTraversal(root);
-    printf("\n");
-    
-    printf("Post-order traversal after insertion of %d: \n", newData);
-    postorderTraversal(root);
-    printf("\n");
 
     return 0;
 }

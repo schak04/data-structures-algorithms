@@ -52,5 +52,5 @@ int peek(struct Node* head) {
         printf("No element at the front.\n");
         return -1;
     }
-
+    return head->data;
 }
