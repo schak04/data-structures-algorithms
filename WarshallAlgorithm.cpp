@@ -1,10 +1,11 @@
 /*
- * Warshall's Algorithm (Transitive Closure)
- * 
- * Finds the transitive closure of a directed graph.
- * Determines if there is a path from vertex i to vertex j for all pairs (i, j).
- * Time Complexity: O(V^3)
- */
+Warshall's algorithm (transitive closure)
+
+- Finds the transitive closure of a directed graph.
+- Determines if there is a path from vertex i to vertex j for all pairs (i, j).
+
+Time Complexity: O(V^3)
+*/
 
 #include <iostream>
 #include <vector>
@@ -15,29 +16,29 @@ private:
     std::vector<std::vector<bool>> reach;
 
 public:
-    /**
-     * Constructor
-     * @param n Number of vertices
-     */
+    /*
+    Constructor.
+    @param n Number of vertices
+    */
     Warshall(int n) : numVertices(n) {
         reach.resize(numVertices, std::vector<bool>(numVertices, false));
     }
 
-    /**
-     * Add an edge to the graph
-     * @param u Source vertex
-     * @param v Destination vertex
-     */
+    /*
+    Add an edge to the graph.
+    @param u Source vertex
+    @param v Destination vertex
+    */
     void addEdge(int u, int v) {
         if (u >= 0 && u < numVertices && v >= 0 && v < numVertices) {
             reach[u][v] = true;
         }
     }
 
-    /**
-     * Set the adjacency matrix directly
-     * @param graph Adjacency matrix (0 = no edge, 1 = edge)
-     */
+    /*
+    Set the adjacency matrix directly.
+    @param graph Adjacency matrix (0 = no edge, 1 = edge)
+    */
     void setGraph(const std::vector<std::vector<int>>& graph) {
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
@@ -46,9 +47,9 @@ public:
         }
     }
 
-    /**
-     * Compute transitive closure using Warshall's algorithm
-     */
+    /*
+    Compute transitive closure using Warshall's algorithm.
+    */
     void computeTransitiveClosure() {
         // Try all intermediate vertices
         for (int k = 0; k < numVertices; k++) {
@@ -64,9 +65,9 @@ public:
         }
     }
 
-    /**
-     * Display the transitive closure matrix
-     */
+    /*
+    Display the transitive closure matrix.
+    */
     void display() const {
         std::cout << "Transitive Closure Matrix:\n";
         std::cout << "   ";
@@ -84,12 +85,12 @@ public:
         }
     }
 
-    /**
-     * Check if there's a path from u to v
-     * @param u Source vertex
-     * @param v Destination vertex
-     * @return true if path exists, false otherwise
-     */
+    /*
+    Check if there's a path from u to v.
+    @param u Source vertex
+    @param v Destination vertex
+    @return true if path exists, false otherwise
+    */
     bool isReachable(int u, int v) const {
         if (u >= 0 && u < numVertices && v >= 0 && v < numVertices) {
             return reach[u][v];

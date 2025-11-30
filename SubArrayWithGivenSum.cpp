@@ -1,21 +1,22 @@
 /*
- * Subarray with Given Sum
- * 
- * Finds a contiguous subarray with a given sum using sliding window technique.
- * Time Complexity: O(n)
- */
+Subarray with given sum
+
+- Finds a contiguous subarray with a given sum using sliding window technique.
+
+Time Complexity: O(n)
+*/
 
 #include <iostream>
 #include <vector>
 
 class SubarraySum {
 public:
-    /**
-     * Find subarray with given sum using sliding window
-     * @param arr Input array
-     * @param target_sum Target sum
-     * @return Pair of start and end indices, or (-1, -1) if not found
-     */
+    /*
+    Find subarray with given sum using sliding window.
+    @param arr Input array
+    @param target_sum Target sum
+    @return Pair of start and end indices, or (-1, -1) if not found
+    */
     static std::pair<int, int> findSubarrayWithSum(const std::vector<int>& arr, int target_sum) {
         int current_sum = 0;
         int start = 0;
@@ -39,12 +40,12 @@ public:
         return {-1, -1}; // Not found
     }
 
-    /**
-     * Find all subarrays with given sum
-     * @param arr Input array
-     * @param target_sum Target sum
-     * @return Vector of pairs (start, end) indices
-     */
+    /*
+    Find all subarrays with given sum.
+    @param arr Input array
+    @param target_sum Target sum
+    @return Vector of pairs (start, end) indices
+    */
     static std::vector<std::pair<int, int>> findAllSubarraysWithSum(
         const std::vector<int>& arr, int target_sum) {
         

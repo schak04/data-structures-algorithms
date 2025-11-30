@@ -1,9 +1,9 @@
 /*
- * Depth-First Search (DFS) using Stack
- * 
- * Implements iterative DFS traversal of a graph using a stack data structure.
- * Uses adjacency matrix representation for the graph.
- */
+Depth-first search (DFS) using stack
+
+- Implements iterative DFS traversal of a graph using a stack data structure.
+- Uses adjacency matrix representation for the graph.
+*/
 
 #include <iostream>
 #include <vector>
@@ -16,20 +16,20 @@ private:
     std::vector<bool> visited;
 
 public:
-    /**
-     * Constructor to initialize the graph
-     * @param vertices Number of vertices in the graph
-     */
+    /*
+    Constructor to initialize the graph.
+    @param vertices Number of vertices in the graph
+    */
     Graph(int vertices) : numVertices(vertices) {
         adjacencyMatrix.resize(numVertices, std::vector<int>(numVertices, 0));
         visited.resize(numVertices, false);
     }
 
-    /**
-     * Add an undirected edge between two vertices
-     * @param u First vertex
-     * @param v Second vertex
-     */
+    /*
+    Add an undirected edge between two vertices.
+    @param u First vertex
+    @param v Second vertex
+    */
     void addEdge(int u, int v) {
         if (u >= 0 && u < numVertices && v >= 0 && v < numVertices) {
             adjacencyMatrix[u][v] = 1;
@@ -37,17 +37,17 @@ public:
         }
     }
 
-    /**
-     * Reset visited array for new traversal
-     */
+    /*
+    Reset visited array for new traversal.
+    */
     void resetVisited() {
         std::fill(visited.begin(), visited.end(), false);
     }
 
-    /**
-     * Perform DFS traversal starting from a given vertex
-     * @param startVertex Starting vertex for DFS
-     */
+    /*
+    Perform DFS traversal starting from a given vertex.
+    @param startVertex Starting vertex for DFS
+    */
     void dfs(int startVertex) {
         if (startVertex < 0 || startVertex >= numVertices) {
             std::cout << "Invalid starting vertex!" << std::endl;
@@ -81,9 +81,9 @@ public:
         std::cout << std::endl;
     }
 
-    /**
-     * Display the adjacency matrix
-     */
+    /*
+    Display the adjacency matrix.
+    */
     void displayMatrix() {
         std::cout << "\nAdjacency Matrix:\n";
         for (int i = 0; i < numVertices; i++) {

@@ -1,9 +1,9 @@
 /*
- * Breadth-First Search (BFS) using Queue
- * 
- * Implements iterative BFS traversal of a graph using a queue data structure.
- * Uses adjacency matrix representation for the graph.
- */
+Breadth-first search (BFS) using queue
+
+- Implements iterative BFS traversal of a graph using a queue data structure.
+- Uses adjacency matrix representation for the graph.
+*/
 
 #include <iostream>
 #include <vector>
@@ -16,20 +16,20 @@ private:
     std::vector<bool> visited;
 
 public:
-    /**
-     * Constructor to initialize the graph
-     * @param vertices Number of vertices in the graph
-     */
+    /*
+    Constructor to initialize the graph.
+    @param vertices Number of vertices in the graph
+    */
     Graph(int vertices) : numVertices(vertices) {
         adjacencyMatrix.resize(numVertices, std::vector<int>(numVertices, 0));
         visited.resize(numVertices, false);
     }
 
-    /**
-     * Add an undirected edge between two vertices
-     * @param u First vertex
-     * @param v Second vertex
-     */
+    /*
+    Add an undirected edge between two vertices.
+    @param u First vertex
+    @param v Second vertex
+    */
     void addEdge(int u, int v) {
         if (u >= 0 && u < numVertices && v >= 0 && v < numVertices) {
             adjacencyMatrix[u][v] = 1;
@@ -37,17 +37,17 @@ public:
         }
     }
 
-    /**
-     * Reset visited array for new traversal
-     */
+    /*
+    Reset visited array for new traversal.
+    */
     void resetVisited() {
         std::fill(visited.begin(), visited.end(), false);
     }
 
-    /**
-     * Perform BFS traversal starting from a given vertex
-     * @param startVertex Starting vertex for BFS
-     */
+    /*
+    Perform BFS traversal starting from a given vertex.
+    @param startVertex Starting vertex for BFS
+    */
     void bfs(int startVertex) {
         if (startVertex < 0 || startVertex >= numVertices) {
             std::cout << "Invalid starting vertex!" << std::endl;
@@ -79,9 +79,9 @@ public:
         std::cout << std::endl;
     }
 
-    /**
-     * Display the adjacency matrix
-     */
+    /*
+    Display the adjacency matrix.
+    */
     void displayMatrix() {
         std::cout << "\nAdjacency Matrix:\n";
         for (int i = 0; i < numVertices; i++) {

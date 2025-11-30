@@ -14,12 +14,12 @@
 
 class QuickSort {
 public:
-    /**
-     * Sort an array using Quick Sort
-     * @param arr Array to sort
-     * @param low Starting index
-     * @param high Ending index
-     */
+    /*
+    Sort an array using quick sort.
+    @param arr Array to sort
+    @param low Starting index
+    @param high Ending index
+    */
     static void quickSort(std::vector<int>& arr, int low, int high) {
         if (low < high) {
             // Partition the array and get pivot index
@@ -31,13 +31,13 @@ public:
         }
     }
 
-    /**
-     * Partition function - places pivot at correct position
-     * @param arr Array to partition
-     * @param low Starting index
-     * @param high Ending index
-     * @return Index of pivot after partitioning
-     */
+    /*
+    Partition function - places pivot at correct position.
+    @param arr Array to partition
+    @param low Starting index
+    @param high Ending index
+    @return Index of pivot after partitioning
+    */
     static int partition(std::vector<int>& arr, int low, int high) {
         int pivot = arr[high]; // Select last element as pivot
         int i = low - 1;       // Index of smaller element
@@ -55,9 +55,9 @@ public:
         return (i + 1);
     }
 
-    /**
-     * Print array
-     */
+    /*
+    Print array.
+    */
     static void printArray(const std::vector<int>& arr) {
         for (size_t i = 0; i < arr.size(); i++) {
             std::cout << arr[i];

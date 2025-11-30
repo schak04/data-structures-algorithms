@@ -1,10 +1,11 @@
 /*
- * Floyd-Warshall Algorithm
- * 
- * Finds shortest paths between all pairs of vertices in a weighted graph.
- * Can handle negative edge weights (but not negative cycles).
- * Time Complexity: O(V^3)
- */
+Floyd-Warshall algorithm
+
+- Finds shortest paths between all pairs of vertices in a weighted graph.
+- Can handle negative edge weights (but not negative cycles).
+
+Time Complexity: O(V^3)
+*/
 
 #include <iostream>
 #include <vector>
@@ -18,10 +19,10 @@ private:
     static constexpr int INF = 99999;
 
 public:
-    /**
-     * Constructor
-     * @param n Number of vertices
-     */
+    /*
+    Constructor.
+    @param n Number of vertices
+    */
     FloydWarshall(int n) : numVertices(n) {
         dist.resize(numVertices, std::vector<int>(numVertices, INF));
         
@@ -31,22 +32,22 @@ public:
         }
     }
 
-    /**
-     * Add an edge to the graph
-     * @param u Source vertex
-     * @param v Destination vertex
-     * @param weight Edge weight
-     */
+    /*
+    Add an edge to the graph.
+    @param u Source vertex
+    @param v Destination vertex
+    @param weight Edge weight
+    */
     void addEdge(int u, int v, int weight) {
         if (u >= 0 && u < numVertices && v >= 0 && v < numVertices) {
             dist[u][v] = weight;
         }
     }
 
-    /**
-     * Set the adjacency matrix directly
-     * @param graph Adjacency matrix (use INF for no edge)
-     */
+    /*
+    Set the adjacency matrix directly.
+    @param graph Adjacency matrix (use INF for no edge)
+    */
     void setGraph(const std::vector<std::vector<int>>& graph) {
         dist = graph;
         for (int i = 0; i < numVertices; i++) {
@@ -54,9 +55,9 @@ public:
         }
     }
 
-    /**
-     * Compute shortest paths using Floyd-Warshall algorithm
-     */
+    /*
+    Compute shortest paths using Floyd-Warshall algorithm.
+    */
     void computeShortestPaths() {
         // Try all intermediate vertices
         for (int k = 0; k < numVertices; k++) {
@@ -75,9 +76,9 @@ public:
         }
     }
 
-    /**
-     * Display the shortest distance matrix
-     */
+    /*
+    Display the shortest distance matrix.
+    */
     void display() const {
         std::cout << "Shortest distances between every pair of vertices:\n";
         std::cout << "   ";
@@ -99,12 +100,12 @@ public:
         }
     }
 
-    /**
-     * Get shortest distance between two vertices
-     * @param u Source vertex
-     * @param v Destination vertex
-     * @return Shortest distance, or INF if unreachable
-     */
+    /*
+    Get shortest distance between two vertices.
+    @param u Source vertex
+    @param v Destination vertex
+    @return Shortest distance, or INF if unreachable
+    */
     int getDistance(int u, int v) const {
         if (u >= 0 && u < numVertices && v >= 0 && v < numVertices) {
             return dist[u][v];

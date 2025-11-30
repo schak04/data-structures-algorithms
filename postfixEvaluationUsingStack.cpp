@@ -1,10 +1,10 @@
 /*
- * Postfix Expression Evaluation
- * 
- * Evaluates postfix expressions using a stack.
- * Operands are pushed onto the stack, and operators pop two operands,
- * perform the operation, and push the result back.
- */
+Postfix Expression Evaluation
+
+- Evaluates postfix expressions using a stack.
+- Operands are pushed onto the stack, and operators pop two operands,
+- perform the operation, and push the result back.
+*/
 
 #include <iostream>
 #include <stack>
@@ -15,11 +15,11 @@
 
 class PostfixEvaluator {
 public:
-    /**
-     * Evaluate a postfix expression
-     * @param expression Postfix expression string
-     * @return Result of the evaluation
-     */
+    /*
+    Evaluate a postfix expression.
+    @param expression Postfix expression string
+    @return Result of the evaluation
+    */
     static int evaluate(const std::string& expression) {
         std::stack<int> stk;
         
@@ -51,16 +51,16 @@ public:
     }
 
 private:
-    /**
-     * Check if character is an operator
-     */
+    /*
+    Check if character is an operator.
+    */
     static bool isOperator(char c) {
         return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
     }
     
-    /**
-     * Perform arithmetic operation
-     */
+    /*
+    Perform arithmetic operation.
+    */
     static int performOperation(char op, int a, int b) {
         switch (op) {
             case '+': return a + b;

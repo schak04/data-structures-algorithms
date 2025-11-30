@@ -1,11 +1,11 @@
 /*
- * Prefix Expression Evaluation
- * 
- * Evaluates prefix expressions using a stack.
- * Since prefix is evaluated right to left, we traverse from right to left.
- * Operands are pushed onto the stack, and operators pop two operands,
- * perform the operation, and push the result back.
- */
+Prefix expression evaluation
+
+- Evaluates prefix expressions using a stack.
+- Since prefix is evaluated right to left, we traverse from right to left.
+- Operands are pushed onto the stack, and operators pop two operands,
+  perform the operation, and push the result back.
+*/
 
 #include <iostream>
 #include <stack>
@@ -16,11 +16,11 @@
 
 class PrefixEvaluator {
 public:
-    /**
-     * Evaluate a prefix expression
-     * @param expression Prefix expression string
-     * @return Result of the evaluation
-     */
+    /*
+    Evaluate a prefix expression.
+    @param expression Prefix expression string
+    @return Result of the evaluation
+    */
     static int evaluate(const std::string& expression) {
         std::stack<int> stk;
         
@@ -55,17 +55,17 @@ public:
     }
 
 private:
-    /**
-     * Check if character is an operator
-     */
+    /*
+    Check if character is an operator.
+    */
     static bool isOperator(char c) {
         return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
     }
     
-    /**
-     * Perform arithmetic operation
-     * Note: For prefix, val1 is the first operand, val2 is the second
-     */
+    /*
+    Perform arithmetic operation.
+    Note: for prefix, val1 is the first operand, val2 is the second.
+    */
     static int performOperation(char op, int a, int b) {
         switch (op) {
             case '+': return a + b;

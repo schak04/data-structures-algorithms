@@ -1,9 +1,9 @@
 /*
- * Graph Implementation using Adjacency List
- * 
- * Represents an undirected graph using adjacency lists.
- * Each vertex has a list of its adjacent vertices.
- */
+Graph implementation using adjacency list
+
+- Represents an undirected graph using adjacency lists.
+- Each vertex has a list of its adjacent vertices.
+*/
 
 /*
 #include <stdio.h>
@@ -69,16 +69,16 @@ private:
     std::vector<std::list<int>> adjacencyList;
 
 public:
-    /**
-     * Constructor
-     */
+    /*
+    Constructor.
+    */
     Graph(int vertices) : numVertices(vertices) {
         adjacencyList.resize(numVertices);
     }
 
-    /**
-     * Add an undirected edge
-     */
+    /*
+    Add an undirected edge.
+    */
     void addEdge(int u, int v) {
         if (u >= 0 && u < numVertices && v >= 0 && v < numVertices) {
             adjacencyList[u].push_back(v);
@@ -86,9 +86,9 @@ public:
         }
     }
 
-    /**
-     * Remove an undirected edge
-     */
+    /*
+    Remove an undirected edge.
+    */
     void removeEdge(int u, int v) {
         if (u >= 0 && u < numVertices && v >= 0 && v < numVertices) {
             adjacencyList[u].remove(v);
@@ -96,9 +96,9 @@ public:
         }
     }
 
-    /**
-     * Check if two vertices are connected
-     */
+    /*
+    Check if two vertices are connected.
+    */
     bool isConnected(int u, int v) const {
         if (u < 0 || u >= numVertices || v < 0 || v >= numVertices)
             return false;
@@ -107,17 +107,17 @@ public:
         return false;
     }
 
-    /**
-     * Return the degree of a vertex
-     */
+    /*
+    Return the degree of a vertex.
+    */
     int degree(int vertex) const {
         if (vertex < 0 || vertex >= numVertices) return 0;
         return adjacencyList[vertex].size();
     }
 
-    /**
-     * Display adjacency list
-     */
+    /*
+    Display adjacency list.
+    */
     void displayAdjList() const {
         std::cout << "Adjacency List Representation:\n";
         for (int i = 0; i < numVertices; i++) {
@@ -128,9 +128,9 @@ public:
         }
     }
 
-    /**
-     * Get adjacency list of a vertex
-     */
+    /*
+    Get adjacency list of a vertex.
+    */
     const std::list<int>& getAdjacent(int vertex) const {
         return adjacencyList[vertex];
     }
